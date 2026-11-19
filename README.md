@@ -6,7 +6,7 @@ The portfolio features a clean interface, dark theme with cyan accents, animated
 
 ## Live Portfolio
 
-Visit my portfolio: [Add your deployed website URL here]
+Visit my portfolio: https://my-personal-portfolio-six-psi-35.vercel.app
 
 ## Run Locally
 
