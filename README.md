@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vishnu Rohith B — Portfolio
 
-## Getting Started
+A responsive Next.js portfolio with a dark theme, lime accents, a CSS particle
+hero, and sections for the journey, experience, skills, and selected work.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customize
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Update the portfolio text, skills, and project cards in `app/page.tsx`.
+- Adjust colors, typography, and responsive styles in `app/globals.css`.
+- Update the page title and SEO description in `app/layout.tsx`.
+- Replace `public/Vishnu_Rohith_B.pdf` with the latest CV.
+- Replace `app/icon.svg`, `app/apple-icon.png`, and
+  `app/opengraph-image.jpg` to update the portfolio branding.
 
-## Learn More
+## Validate and build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact form delivery
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The contact form sends messages through [Resend](https://resend.com). Verify a
+sender domain in Resend, then add these server-only variables to `.env.local`:
 
-## Deploy on Vercel
+```env
+RESEND_API_KEY=re_your_api_key
+RESEND_FROM_EMAIL="Portfolio <contact@your-verified-domain.com>"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set the same variables in your deployment provider and redeploy. Do not prefix
+the API key with `NEXT_PUBLIC_` or commit it to source control. The form sends
+to `elvismoyo400@gmail.com`; replies go to the sender's email address.
