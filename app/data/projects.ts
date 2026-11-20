@@ -1,3 +1,4 @@
+
 export interface Project {
   number: string;
   name: string;
@@ -6,6 +7,7 @@ export interface Project {
   role: string;
   stack: string[];
   highlights: string[];
+  result: string;
   liveDemo: string | null;
   github: string | null;
   previewImage: string | null;
@@ -25,6 +27,8 @@ export const projects: Project[] = [
       "Django-based application architecture",
       "Responsive interface for phone and desktop users",
     ],
+    result:
+      "Established a structured foundation for an e-commerce platform focused on cellphone parts in Zimbabwe.",
     liveDemo: "[ADD: live URL]",
     github: "[ADD: GitHub URL]",
     previewImage: "[ADD: screenshot]",
@@ -42,6 +46,8 @@ export const projects: Project[] = [
       "Responsive sections for activities and itineraries",
       "Informational content organised for prospective visitors",
     ],
+    result:
+      "Created a responsive website presenting the safari camp, its experiences, and visitor information.",
     liveDemo: "https://nyamatusi-sigma.vercel.app/",
     github: "https://github.com/elvismoyo400/Nyamatusi.git",
     previewImage: "/nyamatusi-preview.png",
@@ -59,6 +65,8 @@ export const projects: Project[] = [
       "Immediate feedback and score tracking",
       "Restartable quiz experience",
     ],
+    result:
+      "Delivered an interactive quiz experience with automatic scoring and restart functionality.",
     liveDemo: "https://quiz-app-eosin-tau.vercel.app/",
     github: "https://github.com/elvismoyo400/Quiz-App.git",
     previewImage: "/Quizapp.png",
@@ -66,16 +74,24 @@ export const projects: Project[] = [
   {
     number: "04",
     name: "Gwaai Valley Secondary School Website",
-    kind: "[ADD: Personal project or real client] · School website",
+    kind: "Personal project · School website",
     problem:
       "Make school information easier to find and improve communication through a clear public-facing website.",
     role: "Designer and developer",
-    stack: ["React", "JavaScript", "Tailwind CSS", "JSX", "Responsive Web Design"],
+    stack: [
+      "React",
+      "JavaScript",
+      "Tailwind CSS",
+      "JSX",
+      "Responsive Web Design",
+    ],
     highlights: [
       "School identity and programme information",
       "Admissions and school activity sections",
       "Responsive layout for students, parents, and visitors",
     ],
+    result:
+      "Developed a responsive school website to make institutional information and admissions details more accessible.",
     liveDemo: "https://gwaai-valley-website.vercel.app/",
     github: "https://github.com/elvismoyo400/Gwaai-Valley-website.git",
     previewImage: "/schoolwebsite.png",
