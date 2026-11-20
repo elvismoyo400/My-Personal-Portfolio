@@ -236,7 +236,7 @@ a:focus-visible {
 }
 
 .accent,
-.contact-section h2 span {
+.contact-section h2 .typewriter-accent {
   color: var(--accent);
 }
 
@@ -252,6 +252,14 @@ a:focus-visible {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 58px;
+}
+
+.availability-line {
+  margin: 14px 0 0;
+  color: var(--foreground);
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
 }
 
 .hero-social-links {
@@ -515,7 +523,7 @@ a:focus-visible {
   text-align: center;
 }
 
-.skills-section .section-heading h2 span {
+.skills-section .section-heading h2 .typewriter-accent {
   color: var(--accent);
 }
 
@@ -523,10 +531,28 @@ a:focus-visible {
   margin-inline: auto;
 }
 
+.skill-groups {
+  display: grid;
+  gap: 20px;
+}
+
+.skill-group {
+  min-width: 0;
+}
+
+.skill-group h3 {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .skill-marquee {
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
     90deg,
@@ -550,9 +576,13 @@ a:focus-visible {
   animation: skills-marquee 58s linear infinite;
 }
 
-.skill-marquee:hover .skill-track,
-.skill-marquee:focus-within .skill-track {
+.skill-marquee:hover .skill-track {
   animation-play-state: paused;
+}
+
+.skill-marquee:focus-within .skill-track {
+  animation: none;
+  transform: none;
 }
 
 .skill-list {
@@ -562,6 +592,100 @@ a:focus-visible {
   margin: 0;
   padding: 16px 14px 28px;
   list-style: none;
+}
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.experience-card.certificate-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgb(255 255 255 / 3%), transparent 70%);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Accent bar across the top */
+.certificate-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.72;
+}
+
+.certificate-card--professional::before {
+  opacity: 1;
+  height: 4px;
+}
+
+.certificate-card--professional {
+  border-color: rgb(212 255 79 / 42%);
+}
+
+.certificate-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.certificate-meta .section-kicker {
+  margin: 0;
+}
+
+.certificate-meta time {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.certificate-card h3 {
+  margin: 0.25rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.certificate-issuer {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/* Pushes the button to the bottom so all cards align */
+.certificate-verify {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.certificate-card h3 + .certificate-issuer {
+  margin-bottom: 1rem;
+}
+
+@media (hover: hover) {
+  .certificate-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgb(0 0 0 / 25%), 0 0 24px rgb(212 255 79 / 7%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-card.certificate-card {
+    transition: none;
+  }
+  .certificate-card:hover {
+    transform: none;
+  }
 }
 
 @keyframes skills-marquee {
@@ -575,6 +699,7 @@ a:focus-visible {
 }
 
 .skill-card {
+  position: relative;
   display: flex;
   width: 164px;
   min-width: 164px;
@@ -595,7 +720,8 @@ a:focus-visible {
     transform 180ms ease;
 }
 
-.skill-card:hover {
+.skill-card:hover,
+.skill-card:focus-within {
   transform: translateY(-4px);
   border-color: rgb(212 255 79 / 42%);
   background:
@@ -630,35 +756,7 @@ a:focus-visible {
   font-size: 13px;
   font-weight: 620;
   letter-spacing: -0.025em;
-}
-
-.skill-progress {
-  position: relative;
-  width: 100%;
-  height: 20px;
-  overflow: hidden;
-  margin-top: auto;
-  border-radius: 999px;
-  background: rgb(212 255 79 / 13%);
-}
-
-.skill-progress-fill {
-  display: flex;
-  height: 100%;
-  min-width: 42px;
-  align-items: center;
-  justify-content: center;
-  border-radius: inherit;
-  background: var(--accent);
-  color: var(--background);
-  transition: width 450ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.skill-progress-fill > span {
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
+  text-align: center;
 }
 
 .work-heading {
@@ -695,7 +793,7 @@ a:focus-visible {
   line-height: 1.05;
 }
 
-.contact-page-heading h2 span {
+.contact-page-heading h2 .typewriter-accent {
   color: var(--accent);
 }
 
@@ -1122,8 +1220,7 @@ a:focus-visible {
   transition-delay: 110ms;
 }
 
-.motion-ready .timeline-item:nth-child(2),
-.motion-ready .skill-card:nth-child(even) {
+.motion-ready .timeline-item:nth-child(2) {
   transition-delay: 80ms;
 }
 
@@ -1348,17 +1445,7 @@ a:focus-visible {
     transition: none;
   }
 
-  .skill-marquee {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .skill-track {
-    animation: none;
-  }
-
-  .skill-list[aria-hidden="true"] {
-    display: none;
+  .skill-groups {
+    grid-template-columns: 1fr;
   }
 }

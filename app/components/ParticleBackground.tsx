@@ -18,7 +18,7 @@ export default function ParticleBackground() {
     }
 
     const targets = document.querySelectorAll<HTMLElement>(
-      ".hero h1, main h2, main p, .timeline-item, .experience-card, .skill-card, .contact-form-panel, .contact-info-panel",
+      ".hero h1, main h2, main p, .timeline-item, .experience-card, .skill-group, .contact-form-panel, .contact-info-panel",
     );
     const observer = new IntersectionObserver(
       (entries) => {

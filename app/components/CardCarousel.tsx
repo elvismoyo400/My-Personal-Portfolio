@@ -93,7 +93,11 @@ function ProjectCard({
       }}
     >
       <div className={styles.media}>
-        {project.previewImage ? (
+        {project.previewImage?.startsWith("[ADD:") ? (
+          <div className={styles.imagePlaceholder} aria-hidden="true">
+            <span className={styles.screenshotPlaceholder}>{project.previewImage}</span>
+          </div>
+        ) : project.previewImage ? (
           project.liveDemo ? (
             <a
               aria-label={`Open ${project.name} project`}
@@ -134,48 +138,67 @@ function ProjectCard({
       <div className={styles.content}>
         <p className={styles.category}>{project.kind}</p>
         <h3 className={styles.title}>{project.name}</h3>
-        <p className={styles.description}>{project.description}</p>
-
-        <ul
-          aria-label={`${project.name} technologies`}
-          className={styles.tags}
-        >
-          {project.tools.map((tool) => (
-            <li key={tool}>{tool}</li>
-          ))}
-        </ul>
-
-        {(project.liveDemo || project.github) && (
-          <div className={styles.actions}>
-            {project.liveDemo && (
-              <a
-                className={styles.primaryAction}
-                href={project.liveDemo}
-                rel="noopener noreferrer"
-                tabIndex={isActive ? undefined : -1}
-                target="_blank"
-              >
-                View project
-                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M4 12 12 4M5 4h7v7" />
-                </svg>
-              </a>
-            )}
-            {project.github && (
-              <a
-                aria-label={`View ${project.name} source code on GitHub`}
-                className={styles.secondaryAction}
-                href={project.github}
-                rel="noopener noreferrer"
-                tabIndex={isActive ? undefined : -1}
-                target="_blank"
-              >
-                <SiGithub aria-hidden="true" focusable="false" />
-                <span>GitHub</span>
-              </a>
-            )}
+        <dl className={styles.details}>
+          <div>
+            <dt>Problem</dt>
+            <dd>{project.problem}</dd>
           </div>
-        )}
+          <div>
+            <dt>My role</dt>
+            <dd>{project.role}</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>{project.stack.join(", ")}</dd>
+          </div>
+          <div>
+            <dt>Highlights</dt>
+            <dd>
+              <ul>
+                {project.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt>Result</dt>
+            <dd>{project.result}</dd>
+          </div>
+        </dl>
+        <div className={styles.actions}>
+          {project.liveDemo?.startsWith("[ADD:") ? (
+            <span className={styles.placeholderAction}>View project — {project.liveDemo}</span>
+          ) : project.liveDemo ? (
+            <a
+              className={styles.primaryAction}
+              href={project.liveDemo}
+              rel="noopener noreferrer"
+              tabIndex={isActive ? undefined : -1}
+              target="_blank"
+            >
+              View project
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 12 12 4M5 4h7v7" />
+              </svg>
+            </a>
+          ) : null}
+          {project.github?.startsWith("[ADD:") ? (
+            <span className={styles.placeholderAction}>GitHub — {project.github}</span>
+          ) : project.github ? (
+            <a
+              aria-label={`View ${project.name} source code on GitHub`}
+              className={styles.secondaryAction}
+              href={project.github}
+              rel="noopener noreferrer"
+              tabIndex={isActive ? undefined : -1}
+              target="_blank"
+            >
+              <SiGithub aria-hidden="true" focusable="false" />
+              <span>GitHub</span>
+            </a>
+          ) : null}
+        </div>
       </div>
     </motion.article>
   );

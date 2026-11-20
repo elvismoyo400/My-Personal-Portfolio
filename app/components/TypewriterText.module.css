@@ -1,0 +1,46 @@
+.heading {
+  position: relative;
+}
+
+.heroHeading .reserve,
+.heroHeading .visual {
+  white-space: inherit;
+}
+
+.reserve {
+  visibility: hidden;
+  white-space: pre-line;
+}
+
+.visual {
+  position: absolute;
+  inset: 0;
+  display: block;
+  white-space: pre-line;
+}
+
+.cursor::after {
+  display: inline-block;
+  height: 0.82em;
+  margin-left: 0.08em;
+  border-left: 1px solid currentColor;
+  animation: cursor-blink 760ms steps(2, start) infinite;
+  content: "";
+  vertical-align: -0.07em;
+}
+
+@keyframes cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reserve {
+    visibility: visible;
+  }
+
+  .visual {
+    visibility: hidden;
+  }
+}

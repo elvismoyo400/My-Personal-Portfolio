@@ -40,7 +40,7 @@
 
 .stage {
   position: relative;
-  height: clamp(470px, 44vw, 560px);
+  height: clamp(620px, 58vw, 700px);
   perspective: 1500px;
   transform-style: preserve-3d;
   touch-action: pan-y;
@@ -134,6 +134,15 @@
   letter-spacing: -0.1em;
 }
 
+.imagePlaceholder .screenshotPlaceholder {
+  max-width: 260px;
+  color: rgb(212 255 79 / 72%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
 .mediaShade {
   position: absolute;
   z-index: 1;
@@ -184,51 +193,39 @@
   line-height: 1.15;
 }
 
-.description {
-  display: -webkit-box;
-  max-height: 0;
-  overflow: hidden;
-  margin: 0;
-  color: #a7a7ae;
-  font-size: 12px;
-  line-height: 1.7;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    max-height 300ms ease,
-    margin 300ms ease,
-    opacity 220ms ease,
-    transform 300ms ease;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-
-.activeCard:hover .description,
-.activeCard:focus-within .description {
-  max-height: 8em;
-  margin-top: 10px;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
+.details {
+  display: grid;
   gap: 7px;
-  margin: 16px 0 18px;
-  padding: 0;
-  list-style: none;
+  margin: 12px 0 14px;
+  font-size: 11px;
+  line-height: 1.45;
 }
 
-.tags li {
-  padding: 5px 8px;
-  border: 1px solid rgb(212 255 79 / 24%);
-  border-radius: 999px;
-  background: rgb(212 255 79 / 4%);
-  color: #d7ed9b;
+.details div {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 8px;
+}
+
+.details dt {
+  color: var(--accent);
   font-family: var(--font-geist-mono), monospace;
   font-size: 9px;
-  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.details dd {
+  margin: 0;
+  color: #b0b0b6;
+}
+
+.details dd ul {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .actions {
@@ -291,6 +288,18 @@
   width: 15px;
   height: 15px;
   flex: 0 0 auto;
+}
+
+.placeholderAction {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px dashed rgb(212 255 79 / 32%);
+  border-radius: 10px;
+  color: #d7ed9b;
+  font-size: 9px;
+  line-height: 1.35;
 }
 
 .controls {
@@ -380,7 +389,7 @@
 
 @media (max-width: 760px) {
   .stage {
-    height: 500px;
+    height: 680px;
   }
 
   .card {
@@ -403,7 +412,7 @@
 
 @media (max-width: 480px) {
   .stage {
-    height: 470px;
+    height: 700px;
   }
 
   .card {
@@ -423,8 +432,12 @@
     font-size: 21px;
   }
 
-  .description {
-    font-size: 11px;
+  .details {
+    font-size: 10px;
+  }
+
+  .details div {
+    grid-template-columns: 58px 1fr;
   }
 
   .controls {
@@ -438,19 +451,9 @@
   }
 }
 
-@media (hover: none) {
-  .description {
-    max-height: 8em;
-    margin-top: 10px;
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .card,
   .image,
-  .description,
   .primaryAction,
   .secondaryAction,
   .arrow,

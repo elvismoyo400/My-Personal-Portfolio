@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LoadingStateProvider } from "./contexts/LoadingState";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,18 +15,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ELVIS MOYO | Full-Stack Engineer",
+  title: "Elvis Moyo | Junior Full-Stack Developer",
   description:
-    "I build systems that think, scale, and endure. Explore the work, skills, and journey of Elvis Moyo, a full-stack engineer from Lupane, Zimbabwe.",
+    "Junior Full-Stack Developer based in Lupane, Zimbabwe. I build practical web applications with Django and React for real businesses, schools, and communities.",
   openGraph: {
-    title: "Elvis Moyo | Full-Stack Engineer",
-    description: "I build systems that think, scale, and endure.",
+    title: "Elvis Moyo | Junior Full-Stack Developer",
+    description:
+      "Junior Full-Stack Developer based in Lupane, Zimbabwe. I build practical web applications with Django and React for real businesses, schools, and communities.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Elvis Moyo | Full-Stack Engineer",
-    description: "I build systems that think, scale, and endure.",
+    title: "Elvis Moyo | Junior Full-Stack Developer",
+    description:
+      "Junior Full-Stack Developer based in Lupane, Zimbabwe. I build practical web applications with Django and React for real businesses, schools, and communities.",
   },
 };
 
@@ -36,7 +39,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        <LoadingStateProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </LoadingStateProvider>
       </body>
     </html>
   );

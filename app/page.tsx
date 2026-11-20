@@ -1,99 +1,26 @@
+import AfterLoading from "./components/AfterLoading";
 import LoadingScreen from "./loading-screen";
 import ParticleBackground from "./components/ParticleBackground";
 import ContactForm from "./components/ContactForm";
 import CardCarousel from "./components/CardCarousel";
+import SkillsMarquees from "./components/SkillsMarquees";
+import SectionHeading from "./components/SectionHeading";
+import TypewriterText from "./components/TypewriterText";
 import type { IconType } from "react-icons";
 import {
-  FaDatabase,
   FaEnvelope,
   FaLinkedinIn,
-  FaMagnifyingGlass,
-  FaMobileScreenButton,
-  FaObjectGroup,
-  FaPalette,
-  FaPenRuler,
   FaWhatsapp,
 } from "react-icons/fa6";
+import { SiGithub } from "react-icons/si";
 import {
-  SiCss,
-  SiDjango,
-  SiFigma,
-  SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
-  SiNextdotjs,
-  SiPython,
-  SiReact,
-  SiTypescript,
-} from "react-icons/si";
-
-const navigation = [
-  { label: "Home", href: "#home" },
-  { label: "Journey", href: "#journey" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Work", href: "#work" },
-  { label: "Contact", href: "#contact" },
-];
-
-const milestones = [
-  {
-    year: "2026",
-    title: "Building strong foundations",
-    description:
-      "Learning programming fundamentals and sharpening problem-solving through regular practice.",
-  },
-  {
-    year: "2026",
-    title: "Exploring the web",
-    description:
-      "Turning ideas into responsive interfaces with HTML, CSS, JavaScript, and modern web tools.",
-  },
-  {
-    year: "NOW",
-    title: "Learning by building",
-    description:
-      "Growing through hands-on projects, collaboration, and a steady focus on creating useful technology.",
-  },
-];
-
-const skills: { name: string; icon: IconType; percentage: number }[] = [
-  { name: "UI/UX Design", icon: FaPenRuler, percentage: 96 },
-  { name: "Figma", icon: SiFigma, percentage: 95 },
-  { name: "Canva", icon: FaPalette, percentage: 94 },
-  { name: "User Research", icon: FaMagnifyingGlass, percentage: 92 },
-  { name: "Web Design", icon: FaObjectGroup, percentage: 95 },
-  { name: "HTML", icon: SiHtml5, percentage: 98 },
-  { name: "CSS", icon: SiCss, percentage: 97 },
-  { name: "JavaScript", icon: SiJavascript, percentage: 94 },
-  { name: "TypeScript", icon: SiTypescript, percentage: 92 },
-  { name: "React.js", icon: SiReact, percentage: 95 },
-  { name: "Next.js", icon: SiNextdotjs, percentage: 93 },
-  { name: "Responsive Design", icon: FaMobileScreenButton, percentage: 96 },
-  { name: "Python", icon: SiPython, percentage: 94 },
-  { name: "Django", icon: SiDjango, percentage: 91 },
-  { name: "SQL", icon: FaDatabase, percentage: 92 },
-  { name: "Git", icon: SiGit, percentage: 93 },
-  { name: "GitHub", icon: SiGithub, percentage: 95 },
-];
-
-const contactMethods = [
-  {
-    label: "Email",
-    detail: "elvismoyo400@gmail.com",
-    href: "mailto:elvismoyo400@gmail.com?subject=Portfolio%20inquiry",
-    icon: "email",
-    external: false,
-  },
-  {
-    label: "WhatsApp",
-    detail: "+263 716 144 042",
-    href: "https://wa.me/263716144042?text=Hi%20Elvis%2C%20I%20found%20your%20portfolio.",
-    icon: "whatsapp",
-    external: true,
-  },
-] as const;
+  contactMethods,
+  experience,
+  hero,
+  navigation,
+} from "./data/content";
+import { certificates } from "./data/certificates";
+import { journey } from "./data/journey";
 
 const heroSocialLinks: {
   label: string;
@@ -164,7 +91,9 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
-      <ParticleBackground />
+      <AfterLoading>
+        <ParticleBackground />
+      </AfterLoading>
       <header className="site-header">
         <div className="nav-wrap">
           <a className="brand-mark" href="#home" aria-label="Elvis Moyo, home">
@@ -189,18 +118,18 @@ export default function Home() {
         <section className="hero" id="home" aria-labelledby="hero-title">
           <div className="hero-content">
             <div className="eyebrow hero-eyebrow">
-              <span>Full-stack engineer</span>
+              <span>{hero.eyebrow[0]}</span>
               <span className="eyebrow-divider" />
-              <span>Lupane, Mat North Province, Zimbabwe</span>
+              <span>{hero.eyebrow[1]}</span>
             </div>
-            <h1 id="hero-title">
-              <span className="hero-word">Elvis</span>{" "}
-              <span className="hero-word accent">Moyo</span>{" "}
-            </h1>
-            <p className="hero-tagline">
-              I build systems that think, scale, and endure.
-              Built in Zimbabwe. Ready for the world.
-            </p>
+            <TypewriterText
+              accentText="Moyo"
+              as="h1"
+              delay={0}
+              id="hero-title"
+              text="Elvis Moyo"
+            />
+            <p className="hero-tagline">{hero.tagline}</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#work">
                 View My Work
@@ -213,6 +142,7 @@ export default function Home() {
                 Download CV
               </a>
             </div>
+            <p className="availability-line">{hero.availability}</p>
             <div className="hero-social-links" role="group" aria-label="Social links">
               {heroSocialLinks.map(({ label, href, icon: Icon, external }) => (
                 <a
@@ -244,74 +174,102 @@ export default function Home() {
         <section className="content-section journey-section" id="journey">
           <div className="section-heading">
             <p className="section-kicker">01 / The journey</p>
-            <h2>Always learning.<br />Always building.</h2>
+            <SectionHeading
+              as="h2"
+              delay={150}
+              first="Always learning."
+              second="Always building."
+            />
             <p className="section-intro">
               A work in progress, shaped by curiosity, practice, and the things
               I make along the way.
             </p>
           </div>
           <div className="timeline">
-            {milestones.map((milestone) => (
-              <article className="timeline-item" key={milestone.title}>
-                <span className="timeline-year">{milestone.year}</span>
+           {journey.map((entry) => (
+             <article className="timeline-item" key={entry.date}>
+               <span className="timeline-year">{entry.date}</span>
                 <div>
-                  <h3>{milestone.title}</h3>
-                  <p>{milestone.description}</p>
+                 <h3>{entry.title}</h3>
+                 <p>{entry.description}</p>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-       <section className="content-section experience-section" id="experience">
+       <section
+  className="content-section certificates-section"
+  id="certificates"
+  aria-labelledby="certificates-title"
+>
   <div className="section-heading">
-    <p className="section-kicker">02 / Experience</p>
-    <h2>Growing through<br />real-world practice.</h2>
+    <p className="section-kicker">02 / Certificates</p>
+    <SectionHeading
+      as="h2"
+      delay={300}
+      first="Certificates &"
+      id="certificates-title"
+      second="credentials."
+    />
   </div>
+
+  <div className="certificate-grid">
+    {certificates.map((certificate) => (
+      <article
+        className={`experience-card certificate-card${
+          certificate.kind === "Professional certificate"
+            ? " certificate-card--professional"
+            : ""
+        }`}
+        key={certificate.title}
+      >
+        <div className="certificate-meta">
+          <p className="section-kicker">{certificate.kind}</p>
+          <time dateTime={certificate.dateTime}>{certificate.date}</time>
+        </div>
+
+        <h3>{certificate.title}</h3>
+        <p className="certificate-issuer">{certificate.issuer}</p>
+
+        <a
+          className="button button-secondary certificate-verify"
+          href={certificate.verifyUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          aria-label={`Verify ${certificate.title} certificate (opens in a new tab)`}
+        >
+          Verify <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+    ))}
+  </div>
+</section>
+
+       <section className="content-section experience-section" id="experience">
+         <div className="section-heading">
+           <p className="section-kicker">03 / Experience</p>
+           <SectionHeading
+             as="h2"
+             delay={450}
+             first="Growing through"
+             second="real-world practice."
+           />
+         </div>
  
-<article className="experience-card">
-  <div className="experience-topline">
-    <span>Independent Development &amp; Projects</span>
-    <span>2026 — Present</span>
-  </div>
-
-  <h3>Junior Software Developer</h3>
-
-  <p>
-    Building practical software development experience through
-    hands-on projects, collaborative development, and continuous
-    learning. Focused on creating responsive web applications,
-    developing functional interfaces, and applying modern
-    technologies to solve real-world problems.
-  </p>
-
-  <ul>
-    <li>
-      Developing responsive web applications using React,
-      Next.js, JavaScript, and TypeScript.
-    </li>
-    <li>
-      Building reusable components and interactive user
-      interfaces with JSX and Tailwind CSS.
-    </li>
-    <li>
-      Working with Python and Django to understand backend
-      development and application architecture.
-    </li>
-    <li>
-      Applying Git and GitHub for version control,
-      collaboration, and project management.
-    </li>
-    <li>
-      Exploring UI/UX principles and translating designs
-      into functional interfaces using Figma.
-    </li>
-    <li>
-      Integrating AI-powered tools into development workflows
-      to improve productivity and problem-solving.
-    </li>
-  </ul>
-</article>
+          <article className="experience-card">
+            <div className="experience-topline">
+              <span>{experience.organization}</span>
+              <span>{experience.period}</span>
+            </div>
+            <h3>{experience.title}</h3>
+            <p>{experience.summary}</p>
+            <ul>
+              {experience.responsibilities.map((responsibility) => (
+                <li key={responsibility}>{responsibility}</li>
+              ))}
+            </ul>
+          </article>
 </section>
 
         <section
@@ -320,88 +278,51 @@ export default function Home() {
           aria-labelledby="skills-title"
         >
           <div className="section-heading">
-  <p className="section-kicker">03 / WHAT I WORK WITH</p>
-
-  <h2 id="skills-title">
-    Tools &amp; technologies
-    <span> behind my work.</span>
-  </h2>
-
-  <p className="section-intro">
-    A growing toolkit of technologies, frameworks, and creative tools
-    I use to build functional, responsive, and user-focused digital
-    experiences.
-  </p>
-</div>
-          <div
-            className="skill-marquee"
-            role="region"
-            aria-label="Skills and proficiency levels"
-          >
-            <div className="skill-track">
-              {[skills, skills].map((skillList, listIndex) => (
-                <ul
-                  className="skill-list"
-                  key={listIndex}
-                  aria-hidden={listIndex === 1}
-                >
-                  {skillList.map((skill) => {
-                    const Icon = skill.icon;
-
-                    return (
-                      <li className="skill-card" key={skill.name}>
-                        <span className="skill-card-icon" aria-hidden="true">
-                          <Icon focusable="false" />
-                        </span>
-                        <h4>{skill.name}</h4>
-                        <div
-                          className="skill-progress"
-                          role="progressbar"
-                          aria-label={`${skill.name} proficiency`}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                          aria-valuenow={skill.percentage}
-                          aria-valuetext={`${skill.percentage}%`}
-                        >
-                          <span
-                            className="skill-progress-fill"
-                            style={{ width: `${skill.percentage}%` }}
-                          >
-                            <span>{skill.percentage}%</span>
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              ))}
-            </div>
+            <p className="section-kicker">04 / WHAT I WORK WITH</p>
+            <SectionHeading
+              as="h2"
+              delay={600}
+              first="Tools & technologies"
+              id="skills-title"
+              second="behind my work."
+            />
+            <p className="section-intro">
+              A growing toolkit of technologies, frameworks, and creative tools
+              I use to build functional, responsive, and user-focused digital
+              experiences.
+            </p>
           </div>
+          <SkillsMarquees />
         </section>
 
         <section className="content-section work-section" id="work">
           <div className="section-heading work-heading">
-  <p className="section-kicker">04 / PROJECTS & EXPERIMENTS</p>
-
-  <h2>
-    Building ideas into
-    <span> real experiences.</span>
-  </h2>
-
-  <p className="section-intro">
-    A selection of projects where I bring together development,
-    problem-solving, and thoughtful design to create practical
-    digital solutions.
-  </p>
-</div>
+            <p className="section-kicker">05 / PROJECTS &amp; EXPERIMENTS</p>
+            <SectionHeading
+              as="h2"
+              delay={750}
+              first="Building ideas into"
+              second="real experiences."
+            />
+            <p className="section-intro">
+              A selection of projects where I bring together development,
+              problem-solving, and thoughtful design to create practical
+              digital solutions.
+            </p>
+          </div>
           <CardCarousel />
         </section>
 
         <footer className="contact-section" id="contact">
           <div className="contact-inner">
             <div className="contact-page-heading">
-              <p className="section-kicker">05 / Contact</p>
-              <h2>Let&apos;s <span>talk.</span></h2>
+              <p className="section-kicker">06 / Contact</p>
+              <SectionHeading
+                as="h2"
+                delay={900}
+                first="Let's"
+                second="talk."
+              />
             </div>
             <div className="contact-layout">
               <section

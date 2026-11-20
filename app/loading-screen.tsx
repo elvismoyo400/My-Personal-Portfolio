@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLoadingState } from "./contexts/LoadingState";
 import styles from "./loading-screen.module.css";
 
 export default function LoadingScreen() {
   const [leaving, setLeaving] = useState(false);
   const [visible, setVisible] = useState(true);
+  const { completeLoading } = useLoadingState();
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const hideTimer = window.setTimeout(() => setVisible(false), 0);
+      const hideTimer = window.setTimeout(() => {
+        setVisible(false);
+        completeLoading();
+      }, 0);
       return () => window.clearTimeout(hideTimer);
     }
 
@@ -20,6 +25,7 @@ export default function LoadingScreen() {
     const completeTimer = window.setTimeout(() => {
       setVisible(false);
       document.body.style.overflow = previousOverflow;
+      completeLoading();
     }, 4200);
 
     return () => {
@@ -27,7 +33,7 @@ export default function LoadingScreen() {
       window.clearTimeout(completeTimer);
       document.body.style.overflow = previousOverflow;
     };
-  }, []);
+  }, [completeLoading]);
 
   if (!visible) return null;
 
